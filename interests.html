@@ -9,7 +9,8 @@
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- Installs hover.css version from instructor video-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css"
-        type="text/css" />
+    type="text/css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Rosie Odenkirk</title>
 </head>
@@ -86,7 +87,10 @@
                             <div class="col-10">
                                 <h4 class="three-reasons-heading uppercase">Coding Grace</h4>
                                 <p>
-                                    Coding Grace are a group of developers based in Ireland who love to code and do other geeky and not necessarily crafty activities. Some of us code full-time, or just for fun (or both). We have people who are part of other technical user groups such as
+                                    Coding Grace are a group of developers based in Ireland who love to code and do
+                                    other geeky and not necessarily crafty activities. Some of us code full-time, or
+                                    just for fun (or both). We have people who are part of other technical user groups
+                                    such as
                                     Dublin ALT.NET, GameCraft, Python Ireland, Ruby Ireland and more.
                                     <a href="https://codinggrace.com/" target="_blank">Coding Grace</a>
                                 </p>
@@ -101,7 +105,10 @@
                             <div class="col-10">
                                 <h4 class="three-reasons-heading uppercase">Django Girls</h4>
                                 <p>
-                                    Django Girls is a non-profit organization and a community that empowers and helps women to organize free, one-day programming workshops by providing tools, resources and support. We are a volunteer run organization with hundreds of people contributing
+                                    Django Girls is a non-profit organization and a community that empowers and helps
+                                    women to organize free, one-day programming workshops by providing tools, resources
+                                    and support. We are a volunteer run organization with hundreds of people
+                                    contributing
                                     to bring more amazing women into the world of technology.
                                     <a href="https://djangogirls.org/" target="_blank">Django Girls</a>
                                 </p>
@@ -116,9 +123,13 @@
                             <div class="col-10">
                                 <h4 class="three-reasons-heading uppercase">Full Stack NY</h4>
                                 <p>
-                                    Our meetup is an event where web designers and developers can come together to learn from and teach each other about emerging technologies. While speakers at Full Stack focus primarily on angularjs, react, node, hapiJS, espress, plain ole' JavaScript,
-                                    HTML, and CSS, we encourage all local web professionals to join us for vivid discussions around technology across the stack in any language.
-                                    <a href="https://www.meetup.com/javascript-full-stack-development/" target="_blank">Full Stack NY</a>
+                                    Our meetup is an event where web designers and developers can come together to learn
+                                    from and teach each other about emerging technologies. While speakers at Full Stack
+                                    focus primarily on angularjs, react, node, hapiJS, espress, plain ole' JavaScript,
+                                    HTML, and CSS, we encourage all local web professionals to join us for vivid
+                                    discussions around technology across the stack in any language.
+                                    <a href="https://www.meetup.com/javascript-full-stack-development/"
+                                        target="_blank">Full Stack NY</a>
                                 </p>
                             </div>
                         </div>
@@ -131,8 +142,13 @@
                             <div class="col-10">
                                 <h4 class="three-reasons-heading uppercase">IoT Nation</h4>
                                 <p>
-                                    IoT Nation's mission is to inspire, engage, and connect entrepreneurs, investors, professionals, & enthusiasts worldwide who are active in the Internet of Things (IoT). This group is for professionals and enthusiasts in the Internet of Things. We welcome
-                                    those who want to learn about this emerging field which is fascinating as IoT makes use of a diverse range of technologies and has the promise to impact a vast number of vertical markets.
+                                    IoT Nation's mission is to inspire, engage, and connect entrepreneurs, investors,
+                                    professionals, & enthusiasts worldwide who are active in the Internet of Things
+                                    (IoT). This group is for professionals and enthusiasts in the Internet of Things. We
+                                    welcome
+                                    those who want to learn about this emerging field which is fascinating as IoT makes
+                                    use of a diverse range of technologies and has the promise to impact a vast number
+                                    of vertical markets.
                                     <a href="https://www.meetup.com/NYCIOT/" target="_blank">IoT Nation</a>
                                 </p>
                             </div>
@@ -147,7 +163,8 @@
             <div class="col-sm-4">
                 <h5 class="uppercase general-sub">About</h5>
                 <p class="inline-block">
-                    Full Stack Web Developer. Skilled in everything from HTML to Heroku. The capacity for structural and design thinking.
+                    Full Stack Web Developer. Skilled in everything from HTML to Heroku. The capacity for structural and
+                    design thinking.
                 </p>
             </div>
             <div class="col-sm-4">
@@ -204,11 +221,96 @@
         </div>
 
     </footer>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDHHyac2SiOYPNYxXMK7rqJjnB8nCaaxE&callback=initMap"></script>
-    <script src="assets/js/maps.js"></script>
+
     <!-- Fontawesome kit -->
     <script src="https://kit.fontawesome.com/e410e4b347.js" crossorigin="anonymous"></script>
+
+    <!-- Google Maps -->
+    <script>
+        async function initMap() {
+        // Request needed libraries.
+        const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+        const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary(
+            "marker",
+        );
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 3,
+            center: { lat: 46.619261, lng: -33.134766 },
+            mapId: "DEMO_MAP_ID",
+        });
+        const infoWindow = new google.maps.InfoWindow({
+            content: "",
+            disableAutoPan: true,
+        });
+        // Create an array of alphabetical characters used to label the markers.
+        const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        // Add some markers to the map.
+        const markers = locations.map((position, i) => {
+            const label = labels[i % labels.length];
+            const pinGlyph = new google.maps.marker.PinElement({
+            glyph: label,
+            glyphColor: "white",
+            });
+            const marker = new google.maps.marker.AdvancedMarkerElement({
+            position,
+            content: pinGlyph.element,
+            });
+
+            // markers can only be keyboard focusable when they have click listeners
+            // open info window when marker is clicked
+            marker.addListener("click", () => {
+            infoWindow.setContent(position.lat + ", " + position.lng);
+            infoWindow.open(map, marker);
+            });
+            return marker;
+        });
+
+        // Add a marker clusterer to manage the markers. can be found in this
+        // link: https://developers.google.com/maps/documentation/javascript/marker-clustering#cdn_1
+        const markerCluster = new MarkerClusterer(map, markers, { 
+            imagePath: 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m' 
+        });
+        }
+
+        const locations = [
+                { lat: 40.785091, lng: -73.968285 },
+                { lat: 41.084045, lng: -73.874245 },
+                { lat: 40.754932, lng: -73.984016 }
+            ];
+
+        
+        // async function initMap() {
+        //     var map = new google.maps.Map(document.getElementById("map"), {
+        //         zoom: 3,
+        //         center: {
+        //             lat: 46.619261,
+        //             lng: -33.134766
+        //         }
+        //     });
+        //     var labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        //     var locations = [
+        //         { lat: 40.785091, lng: -73.968285 },
+        //         { lat: 41.084045, lng: -73.874245 },
+        //         { lat: 40.754932, lng: -73.984016 }
+        //     ];
+
+        //     var markers = locations.map(function (location, i) {
+        //         return new google.maps.Marker.AdvancedMarkerElement({
+        //             position: location,
+        //             label: labels[i % labels.length]
+        //         });
+        //     });
+
+        //     var markerClusterer = MarkerClusterer(map, markers,
+        //         { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+        // }
+
+    </script>
+
+    <script src="https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwpsGCIi868zezVO1azc-tvoTfNOetw9I&callback=initMap"></script>
+
 </body>
 
 </html>
